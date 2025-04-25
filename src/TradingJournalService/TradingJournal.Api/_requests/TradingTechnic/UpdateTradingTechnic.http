@@ -1,0 +1,32 @@
+PUT {{client.host}}/trading-technic/{{tradingTechnicId}}
+Content-Type: multipart/form-data; boundary=MyBoundary
+Authorization: Bearer {{token}}
+
+--MyBoundary 
+Content-Disposition: form-data; name="Id" 
+
+{{tradingTechnicId}}
+
+--MyBoundary 
+Content-Disposition: form-data; name="name" 
+
+name update
+
+--MyBoundary 
+Content-Disposition: form-data; name="description" 
+
+description update
+
+--MyBoundary 
+Content-Disposition: form-data; name="RemovedImages" 
+
+{{removedImages}}
+
+--MyBoundary 
+Content-Disposition: form-data; name="newImages" filename="img2.png" 
+Content-Type: image/png
+
+< C:\Users\amira\Projects\TradingLab\src\TradingJournalService\TradingJournal.Api\_requests\TradingTechnic\images\img2.png
+
+
+--MyBoundary--

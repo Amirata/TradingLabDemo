@@ -1,0 +1,6 @@
+POST {{client.host}}/Accounts/LogoutAll
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+

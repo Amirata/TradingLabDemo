@@ -1,0 +1,3 @@
+GET {{client.host}}/trading-plan/{{tradingPlanName}}
+Content-Type: application/json
+Authorization: Bearer {{token}}

@@ -1,0 +1,3 @@
+GET {{client.host}}/trading-technic?pageSize=5&pageNumber=1&search=&sorts[0].sortBy=Name&sorts[0].sortOrder=asc&sorts[0].order=1
+Content-Type: application/json
+Authorization: Bearer {{token}}

@@ -1,0 +1,36 @@
+[
+  {
+    "Id": "1dffb982-b5e9-48dc-95d2-a17ff4916c4a",
+    "UserName": "admin",
+    "NormalizedUserName": "ADMIN",
+    "Email": "admin@gmail.com",
+    "NormalizedEmail": "ADMIN@GMAIL.COM",
+    "EmailConfirmed": true,
+    "PasswordHash": "AQAAAAIAAYagAAAAEFWUnaTYUvoZlcY+wGbcb6M4/89rvF/xnNkYqz6+I/HMpuEzyojUW/zHTO1yF8FG8w==",
+    "SecurityStamp": "7SI46PSRSCBOO3FYR422OBYHQRBRMT2S",
+    "ConcurrencyStamp": "eadf5db0-503d-4a6c-b1f4-42b71fb889a8",
+    "PhoneNumber": null,
+    "PhoneNumberConfirmed": false,
+    "TwoFactorEnabled": false,
+    "LockoutEnd": null,
+    "LockoutEnabled": true,
+    "AccessFailedCount": 0
+  },
+  {
+    "Id": "dd714910-d4b6-46d7-a20c-47bc00c24049",
+    "UserName": "ali",
+    "NormalizedUserName": "ALI",
+    "Email": "Ali@gmail.com",
+    "NormalizedEmail": "ALI@GMAIL.COM",
+    "EmailConfirmed": false,
+    "PasswordHash": "AQAAAAIAAYagAAAAEOyOmCQur0Drt34ZJmkNgsGUY71w7rljxCSx7NWU67mg+p9ytY2Oh68+vaib3jhIfQ==",
+    "SecurityStamp": "K6VJPVSUAV65GDWEYA7W5PMSFFKC2N4D",
+    "ConcurrencyStamp": "d0da5874-a831-4a43-ae21-0f0005a9ffbc",
+    "PhoneNumber": null,
+    "PhoneNumberConfirmed": false,
+    "TwoFactorEnabled": false,
+    "LockoutEnd": null,
+    "LockoutEnabled": true,
+    "AccessFailedCount": 0
+  }
+]

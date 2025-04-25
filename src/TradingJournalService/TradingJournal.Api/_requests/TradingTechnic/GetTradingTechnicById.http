@@ -1,0 +1,7 @@
+GET {{client.host}}/trading-technic/{{tradingTechnicId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+> {%
+    client.global.set("removedImages", response.body.images[0]);
+%}

@@ -1,0 +1,3 @@
+DELETE {{client.host}}/trading-plan/{{tradingPlanId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}

@@ -1,0 +1,43 @@
+﻿version: '3.8'
+
+services:
+  postgres-db:
+    image: postgres:latest
+    container_name: postgres-db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=postgres          
+      - POSTGRES_PASSWORD=postgres  
+      - POSTGRES_DB=TradingLab        
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine  
+    container_name: rabbitmq
+    restart: unless-stopped
+    ports:
+      - "5672:5672"    
+      - "15672:15672"  
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest  
+      - RABBITMQ_DEFAULT_PASS=guest   
+      #- RABBITMQ_DEFAULT_VHOST=/myvhost 
+    healthcheck:
+      test: [ "CMD", "rabbitmq-diagnostics", "check_port_connectivity" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+  
+volumes:
+  postgres_data:  
+  rabbitmq_data:  

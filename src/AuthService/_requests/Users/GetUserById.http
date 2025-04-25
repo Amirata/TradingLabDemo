@@ -1,0 +1,3 @@
+GET {{client.host}}/Users/GetUserById/1dffb982-b5e9-48dc-95d2-a17ff4916c4a
+Content-Type: application/json
+Authorization: Bearer {{token}}

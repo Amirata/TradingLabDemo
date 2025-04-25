@@ -1,0 +1,7 @@
+GET {{client.host}}/Accounts/GetUser
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+> {%
+    client.global.set("userId", response.body.id);
+%}

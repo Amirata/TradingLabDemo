@@ -1,0 +1,3 @@
+GET {{client.host}}/trade-analyse/GetGrossAndNetForEachSymbolForEachDayOfWeek/{{tradingPlanId}}?fromDate=2025-01-01&toDate=2025-12-31&symbol=0
+Content-Type: application/json
+Authorization: Bearer {{token}}

@@ -1,0 +1,21 @@
+POST {{client.host}}/trading-plan
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "name 1",
+  "fromTime": "01:00:00",
+  "toTime": "23:00:00",
+  "selectedDays": [
+    "Sunday",
+    "Monday"
+  ],
+  "technics": [
+    "{{tradingTechnicId}}"
+  ],
+  "userId": "{{userId}}"
+}
+
+> {%
+    client.global.set("tradingPlanId", response.body.id);
+%}

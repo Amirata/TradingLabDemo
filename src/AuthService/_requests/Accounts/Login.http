@@ -1,0 +1,13 @@
+POST {{client.host}}/Accounts/Login
+Content-Type: application/json
+//Authorization: Bearer {{token}}
+
+{
+  "userName": "admin",
+  "Password": "Pass1234@"
+}
+
+> {%
+    client.global.set("token", response.body.token);
+    client.global.set("refreshToken", response.body.refreshToken);
+%}

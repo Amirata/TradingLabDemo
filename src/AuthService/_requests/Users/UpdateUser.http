@@ -1,0 +1,8 @@
+PUT {{client.host}}/Users/UpdateUser/c1ff7cd5-de48-42cd-8c8f-ec82d63287df
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "userName": "Aliceupdate",
+  "Email": "alice@test1.com"
+}

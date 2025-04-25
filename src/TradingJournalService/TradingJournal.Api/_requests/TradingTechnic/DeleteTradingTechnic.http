@@ -1,0 +1,3 @@
+DELETE {{client.host}}/trading-technic/{{tradingTechnicId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}

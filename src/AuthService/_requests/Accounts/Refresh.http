@@ -1,0 +1,12 @@
+POST {{client.host}}/Accounts/Refresh
+Content-Type: application/json
+//Authorization: Bearer {{token}}
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
+
+> {%
+    client.global.set("token", response.body.token);
+    client.global.set("refreshToken", response.body.refreshToken);
+%}

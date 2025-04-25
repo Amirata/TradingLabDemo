@@ -1,0 +1,22 @@
+PUT {{client.host}}/trading-plan/{{tradingPlanId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+{
+  "id":"{{tradingPlanId}}",
+  "name": "update name 1",
+  "fromTime": "02:00:00",
+  "toTime": "21:00:00",
+  "selectedDays": [
+    "Friday",
+    "Monday"
+  ],
+  "technics": [
+   
+   
+  ],
+  "removedTechnics": [
+   "{{tradingTechnicId}}"
+  ]
+}

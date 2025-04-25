@@ -1,0 +1,7 @@
+GET {{client.host}}/trading-plan/{{tradingPlanId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+> {%
+    client.global.set("tradingPlanName", response.body.name);
+%}

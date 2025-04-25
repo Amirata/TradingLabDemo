@@ -1,0 +1,10 @@
+POST {{client.host}}/Users/CreateUser
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "userName": "Ali89",
+  "Email": "alice@test.com",
+  "Password": "Pass1234",
+  "Role": 1
+}

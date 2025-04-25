@@ -1,0 +1,3 @@
+DELETE {{client.host}}/trade/{{tradeId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}

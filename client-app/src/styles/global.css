@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@plugin 'tailwind-scrollbar' {
+    nocompatible: true;
+    preferredStrategy: 'pseudoelements';
+}
+
+@theme {
+    --font-iran-sans-fa-num: "IRANSans_FaNam";
+    --font-iran-sans: "IRANSans";
+    --font-jbm-regular: "JetBrainsMono-Regular";
+
+    @keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.05);
+        }
+    }
+
+
+}
+
+body{
+    @apply scrollbar-thin scrollbar-thumb-zinc-600 scrollbar-track-zinc-500 bg-zinc-900
+}

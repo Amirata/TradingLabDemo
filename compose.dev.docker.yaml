@@ -1,0 +1,135 @@
+﻿version: '3.8'
+
+services:
+  postgres-db:
+    image: postgres:latest
+    container_name: postgres-db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=postgres          
+      - POSTGRES_PASSWORD=postgres  
+      - POSTGRES_DB=TradingLab     
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine  
+    container_name: rabbitmq
+    restart: unless-stopped
+    ports:
+      - "5672:5672"    
+      - "15672:15672" 
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest  
+      - RABBITMQ_DEFAULT_PASS=guest   
+      #- RABBITMQ_DEFAULT_VHOST=/myvhost 
+    healthcheck:
+      test: [ "CMD", "rabbitmq-diagnostics", "check_port_connectivity" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+  
+  
+  trading-journals-svc:
+    image: amirata/trading-journals-svc:latest
+    build:
+      context: .
+      dockerfile: src/TradingJournalService/TradingJournal.Api/Dockerfile
+    container_name: trading-journals-svc
+    restart: unless-stopped
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - RabbitMq__Host=rabbitmq
+      - ConnectionStrings__Database=Server=postgres-db;User Id=postgres;Password=postgres;Database=TradingLab
+      - Jwt__Key=SUPER_SECURE_KEY_HERE_1234567890
+      - Jwt__Issuer=TradingLab
+      - Jwt__Audience=TradingLab
+      - Jwt__ExpiresInMinutes=180
+      - Jwt__RefreshTokenExpiresInDays=7
+    ports:
+      - 5002:80
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      auth-svc:
+        condition: service_started
+    volumes:
+      - technic_images:/app/wwwroot/TechnicImages
+  
+  
+  auth-svc:
+    image: amirata/auth-svc:latest
+    build:
+      context: .
+      dockerfile: src/AuthService/Dockerfile
+    container_name: auth-svc
+    restart: unless-stopped
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - RabbitMq__Host=rabbitmq
+      - ConnectionStrings__DefaultConnection=Server=postgres-db;User Id=postgres;Password=postgres;Database=Auth
+      - Jwt__Key=SUPER_SECURE_KEY_HERE_1234567890
+      - Jwt__Issuer=TradingLab
+      - Jwt__Audience=TradingLab
+      - Jwt__ExpiresInMinutes=180
+      - Jwt__RefreshTokenExpiresInDays=7
+    ports:
+      - 5001:80
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+  
+  
+  client-svc:
+    image: amirata/client-svc
+    build:
+      context: .
+      dockerfile: client-app/Dockerfile
+    container_name: client-svc
+    restart: unless-stopped
+    environment:
+      - VITE_APP_API_URL=gateway-svc/
+      - VITE_APP_IMG_URL=gateway-svc/TechnicImages/
+    ports:
+      - 3000:80
+
+  gateway-svc:
+    image: amirata/gateway-svc:latest
+    build:
+      context: .
+      dockerfile: src/GateWayService/Dockerfile
+    container_name: gateway-svc
+    restart: unless-stopped
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - 5000:80
+    depends_on:
+      auth-svc:
+        condition: service_started
+      trading-journals-svc:
+        condition: service_started
+      client-svc:
+        condition: service_started
+
+
+volumes:
+  postgres_data:  
+  rabbitmq_data: 
+  technic_images:

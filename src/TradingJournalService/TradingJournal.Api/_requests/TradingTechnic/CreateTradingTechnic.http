@@ -1,0 +1,34 @@
+POST {{client.host}}/trading-technic
+Content-Type: multipart/form-data; boundary=MyBoundary
+Authorization: Bearer {{token}}
+
+--MyBoundary 
+Content-Disposition: form-data; name="name" 
+
+name 
+
+
+--MyBoundary 
+Content-Disposition: form-data; name="description" 
+
+description 
+
+
+--MyBoundary 
+Content-Disposition: form-data; name="userId" 
+
+{{userId}}
+
+
+--MyBoundary 
+Content-Disposition: form-data; name="newImages" filename="img1.png" 
+Content-Type: image/png
+
+< C:\Users\amira\Projects\TradingLab\src\TradingJournalService\TradingJournal.Api\_requests\TradingTechnic\images\img1.png
+
+
+--MyBoundary--
+
+> {%
+    client.global.set("tradingTechnicId", response.body.id);
+%}

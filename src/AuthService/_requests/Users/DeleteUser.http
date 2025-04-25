@@ -1,0 +1,3 @@
+DELETE {{client.host}}/Users/DeleteUser/6d567786-f632-4ea7-937a-bf66ae1629d3
+Content-Type: application/json
+Authorization: Bearer {{token}}

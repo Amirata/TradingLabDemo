@@ -1,0 +1,348 @@
+# @name CreateTradingTechnic
+
+### Create TradingTechnic 
+POST {{client.host}}/api/v1/trading-technic
+Content-Type: application/json
+//Authorization: Bearer {{token}}
+
+{
+  "name": "name 1",
+  "description": "description 1",
+  "pictures": [
+    "path 1",
+    "path 2"
+  ]
+}
+
+> {%
+
+    // {
+    //     "id": "4aad94c6-70c0-4687-a4a0-260c875a103a"
+    // }
+    
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+
+    client.test("Id exists", function() {
+        client.assert(response.body.hasOwnProperty("id"), "Cannot find 'id' in response");
+    });
+
+    client.test("Response content-type is json", function() {
+        var type = response.contentType.mimeType;
+        client.assert(type === "application/json", "Expected 'application/json' but received '" + type + "'");
+
+        client.global.set("tradingTechnicId", response.body.id)
+    });
+%}
+
+###
+
+# @name CreateTradingPlan
+
+### Create TradingPlan
+POST {{client.host}}/api/v1/trading-plan
+Content-Type: application/json
+//Authorization: Bearer {{token}}
+
+{
+  "name": "name 1",
+  "fromTime": "01:00:00",
+  "toTime": "23:00:00",
+  "selectedDays": [
+    "Sunday",
+    "Monday"
+  ],
+  "technics": [
+    "{{tradingTechnicId}}"
+  ]
+}
+
+> {%
+
+    // {
+    //     "id": "4aad94c6-70c0-4687-a4a0-260c875a103a"
+    // }
+    
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+
+    client.test("Id exists", function() {
+        client.assert(response.body.hasOwnProperty("id"), "Cannot find 'id' in response");
+    });
+
+    client.test("Response content-type is json", function() {
+        var type = response.contentType.mimeType;
+        client.assert(type === "application/json", "Expected 'application/json' but received '" + type + "'");
+
+        client.global.set("tradingPlanId", response.body.id)
+    });
+%}
+
+###
+
+# @name CreateTrade
+
+### Create Trade
+POST {{client.host}}/api/v1/trade
+Content-Type: application/json
+//Authorization: Bearer {{token}}
+
+{
+  "tradingPlanId": "{{tradingPlanId}}",
+  "tradeDate": "2025-01-05",
+  "symbol": 0,
+  "positionType": 0,
+  "volume": 1,
+  "entryPrice": 1,
+  "closePrice": 1,
+  "entryDateTime": "2025-01-05T11:52:44",
+  "closeDateTime": "2025-01-05T12:00:00",
+  "commission": 1,
+  "swap": 1,
+  "pips": 1,
+  "netProfit": 1,
+  "grossProfit": 1,
+  "balance": 1,
+  "maxBalanceDrawDownPercent": 1,
+  "maxEquityDrawDownPercent": 1,
+  "maxBalanceDrawDown": 1,
+  "maxEquityDrawDown": 1
+}
+
+> {%
+
+    // {
+    //     "id": "4aad94c6-70c0-4687-a4a0-260c875a103a"
+    // }
+
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+
+    client.test("Id exists", function() {
+        client.assert(response.body.hasOwnProperty("id"), "Cannot find 'id' in response");
+    });
+
+    client.test("Response content-type is json", function() {
+        var type = response.contentType.mimeType;
+        client.assert(type === "application/json", "Expected 'application/json' but received '" + type + "'");
+
+        client.global.set("tradeId", response.body.id)
+    });
+%}
+
+###
+
+# @name GetTradeById
+
+### Get TradingPlanById
+GET {{client.host}}/api/v1/trade/{{tradeId}}
+Content-Type: application/json
+//Authorization: Bearer {{token}}
+
+
+> {%
+
+    // {
+    //     "id": "18f50b79-8aae-42a2-a74a-66ab24c2aac1",
+    //     "tradeDate": "2025-01-06",
+    //     "symbol": 1,
+    //     "positionType": 1,
+    //     "volume": 2,
+    //     "entryPrice": 2,
+    //     "closePrice": 2,
+    //     "entryDateTime": "2025-01-06T15:22:44+03:30",
+    //     "closeDateTime": "2025-01-06T15:30:00+03:30",
+    //     "commission": 2,
+    //     "swap": 2,
+    //     "pips": 2,
+    //     "netProfit": 2,
+    //     "grossProfit": 2,
+    //     "balance": 2,
+    //     "maxBalanceDrawDownPercent": 2,
+    //     "maxEquityDrawDownPercent": 2,
+    //     "maxBalanceDrawDown": 2,
+    //     "maxEquityDrawDown": 2
+    // }
+    
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    client.test("Response content-type is json", function() {
+        var type = response.contentType.mimeType;
+        client.assert(type === "application/json", "Expected 'application/json' but received '" + type + "'");
+    });
+%}
+
+###
+
+# @name UpdateTrade
+
+### Update Trade
+PUT {{client.host}}/api/v1/trade/{{tradeId}}
+Content-Type: application/json
+//Authorization: Bearer {{token}}
+
+{
+  "id": "{{tradeId}}",
+  "tradeDate": "2025-01-06",
+  "symbol": 1,
+  "positionType": 1,
+  "volume": 2,
+  "entryPrice": 2,
+  "closePrice": 2,
+  "entryDateTime": "2025-01-06T11:52:44",
+  "closeDateTime": "2025-01-06T12:00:00",
+  "commission": 2,
+  "swap": 2,
+  "pips": 2,
+  "netProfit": 2,
+  "grossProfit": 2,
+  "balance": 2,
+  "maxBalanceDrawDownPercent": 2,
+  "maxEquityDrawDownPercent": 2,
+  "maxBalanceDrawDown": 2,
+  "maxEquityDrawDown": 2
+}
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 204, "Response status is not 204");
+    });
+
+    client.test("Response content-type is json", function() {
+        var type = response.contentType.mimeType;
+        client.assert(type === "text/plain", "Expected 'text/plain' but received '" + type + "'");
+    });
+%}
+
+###
+
+# @name GetTrades
+
+### Get Trades
+GET {{client.host}}/api/v1/trade
+Content-Type: application/json
+//Authorization: Bearer {{token}}
+
+
+> {%
+
+    // {
+    //     "pageIndex": 1,
+    //     "pageSize": 10,
+    //     "count": 1,
+    //     "totalPage": 1,
+    //     "data": [
+    //     {
+    //         "id": "18f50b79-8aae-42a2-a74a-66ab24c2aac1",
+    //         "tradeDate": "2025-01-06",
+    //         "symbol": 1,
+    //         "positionType": 1,
+    //         "volume": 2,
+    //         "entryPrice": 2,
+    //         "closePrice": 2,
+    //         "entryDateTime": "2025-01-06T15:22:44+03:30",
+    //         "closeDateTime": "2025-01-06T15:30:00+03:30",
+    //         "commission": 2,
+    //         "swap": 2,
+    //         "pips": 2,
+    //         "netProfit": 2,
+    //         "grossProfit": 2,
+    //         "balance": 2,
+    //         "maxBalanceDrawDownPercent": 2,
+    //         "maxEquityDrawDownPercent": 2,
+    //         "maxBalanceDrawDown": 2,
+    //         "maxEquityDrawDown": 2
+    //     }
+    // ]
+    // }
+
+
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    client.test("Response content-type is json", function() {
+        var type = response.contentType.mimeType;
+        client.assert(type === "application/json", "Expected 'application/json' but received '" + type + "'");
+    });
+%}
+
+###
+
+# @name GetTradesByQuery
+
+### Get Trades By Query
+GET {{client.host}}/api/v1/trade?pageIndex=1&pageSize=5
+Content-Type: application/json
+//Authorization: Bearer {{token}}
+
+
+> {%
+
+    // {
+    //     "pageIndex": 1,
+    //     "pageSize": 5,
+    //     "count": 1,
+    //     "totalPage": 1,
+    //     "data": [
+    //     {
+    //         "id": "18f50b79-8aae-42a2-a74a-66ab24c2aac1",
+    //         "tradeDate": "2025-01-06",
+    //         "symbol": 1,
+    //         "positionType": 1,
+    //         "volume": 2,
+    //         "entryPrice": 2,
+    //         "closePrice": 2,
+    //         "entryDateTime": "2025-01-06T15:22:44+03:30",
+    //         "closeDateTime": "2025-01-06T15:30:00+03:30",
+    //         "commission": 2,
+    //         "swap": 2,
+    //         "pips": 2,
+    //         "netProfit": 2,
+    //         "grossProfit": 2,
+    //         "balance": 2,
+    //         "maxBalanceDrawDownPercent": 2,
+    //         "maxEquityDrawDownPercent": 2,
+    //         "maxBalanceDrawDown": 2,
+    //         "maxEquityDrawDown": 2
+    //     }
+    // ]
+    // }
+    
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    client.test("Response content-type is json", function() {
+        var type = response.contentType.mimeType;
+        client.assert(type === "application/json", "Expected 'application/json' but received '" + type + "'");
+    });
+%}
+
+###
+
+# @name DeleteTrade
+
+### Delete Trade
+DELETE {{client.host}}/api/v1/trade/{{tradeId}}
+Content-Type: application/json
+//Authorization: Bearer {{token}}
+
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 204, "Response status is not 204");
+    });
+
+    client.test("Response content-type is json", function() {
+        var type = response.contentType.mimeType;
+        client.assert(type === "text/plain", "Expected 'text/plain' but received '" + type + "'");
+    });
+%}
+
+###

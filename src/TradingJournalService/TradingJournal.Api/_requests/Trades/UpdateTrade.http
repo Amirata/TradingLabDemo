@@ -1,0 +1,27 @@
+PUT {{client.host}}/trade/{{tradeId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+{
+  "id":"{{tradeId}}",
+  "tradeDate": "2025-01-06",
+  "symbol": 1,
+  "positionType": 1,
+  "volume": 2,
+  "entryPrice": 2,
+  "closePrice": 2, 
+  "StopLossPrice": 2,
+  "entryDateTime": "2025-01-06T11:52:44",
+  "closeDateTime": "2025-01-06T12:00:00",
+  "commission": -2,
+  "swap": 2,
+  "pips": 2,
+  "netProfit": 2,
+  "grossProfit": 2,
+  "balance": 2,
+  "maxBalanceDrawDownPercent": 2,
+  "maxEquityDrawDownPercent": 2,
+  "maxBalanceDrawDown": 2,
+  "maxEquityDrawDown": 2
+}

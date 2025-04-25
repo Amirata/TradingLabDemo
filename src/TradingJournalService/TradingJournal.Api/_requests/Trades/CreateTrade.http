@@ -1,0 +1,30 @@
+POST {{client.host}}/trade
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "tradingPlanId": "{{tradingPlanId}}",
+  "tradeDate": "2025-01-05",
+  "symbol": 0,
+  "positionType": 0,
+  "volume": 1,
+  "entryPrice": 1,
+  "closePrice": 1,
+  "StopLossPrice": 1,
+  "entryDateTime": "2025-01-05T11:52:44",
+  "closeDateTime": "2025-01-05T12:00:00",
+  "commission": -1,
+  "swap": 1,
+  "pips": 1,
+  "netProfit": 1,
+  "grossProfit": 1,
+  "balance": 1,
+  "maxBalanceDrawDownPercent": 1,
+  "maxEquityDrawDownPercent": 1,
+  "maxBalanceDrawDown": 1,
+  "maxEquityDrawDown": 1
+}
+
+> {%
+    client.global.set("tradeId", response.body.id);
+%}

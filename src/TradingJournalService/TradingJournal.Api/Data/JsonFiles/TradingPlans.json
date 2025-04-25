@@ -1,0 +1,38 @@
+[
+  {
+    "Id": "092004cb-74d1-4efd-b7bf-158a04d3b4e2",
+    "Name": "معاملات طلا",
+    "FromTime": "01:00:00",
+    "ToTime": "23:59:59",
+    "SelectedDays": 62,
+    "UserId": "1dffb982-b5e9-48dc-95d2-a17ff4916c4a",
+    "CreatedAt": "2025-03-26 07:45:23.439555",
+    "CreatedBy": "1dffb982-b5e9-48dc-95d2-a17ff4916c4a",
+    "LastModified": "2025-03-26 10:03:11.798796",
+    "LastModifiedBy": "1dffb982-b5e9-48dc-95d2-a17ff4916c4a"
+  },
+  {
+    "Id": "3cb0e260-24fa-4a5c-b0f6-ab5c4d5f1f3f",
+    "Name": "معامله پوند",
+    "FromTime": "01:00:00",
+    "ToTime": "23:30:00",
+    "SelectedDays": 62,
+    "UserId": "dd714910-d4b6-46d7-a20c-47bc00c24049",
+    "CreatedAt": "2025-03-26 11:51:01.551152",
+    "CreatedBy": "dd714910-d4b6-46d7-a20c-47bc00c24049",
+    "LastModified": "2025-03-26 11:51:01.551153",
+    "LastModifiedBy": "dd714910-d4b6-46d7-a20c-47bc00c24049"
+  },
+  {
+    "Id": "7fe5dbf1-d062-4e13-b3b7-c1b031c800a9",
+    "Name": "معاملات یورو",
+    "FromTime": null,
+    "ToTime": null,
+    "SelectedDays": 62,
+    "UserId": "1dffb982-b5e9-48dc-95d2-a17ff4916c4a",
+    "CreatedAt": "2025-03-26 10:02:51.445662",
+    "CreatedBy": "1dffb982-b5e9-48dc-95d2-a17ff4916c4a",
+    "LastModified": "2025-03-26 10:02:51.445668",
+    "LastModifiedBy": "1dffb982-b5e9-48dc-95d2-a17ff4916c4a"
+  }
+]

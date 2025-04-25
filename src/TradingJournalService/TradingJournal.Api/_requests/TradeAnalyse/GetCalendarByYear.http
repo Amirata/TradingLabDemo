@@ -1,0 +1,3 @@
+GET {{client.host}}/trade-analyse/{{tradingPlanId}}/2025
+Content-Type: application/json
+Authorization: Bearer {{token}}
