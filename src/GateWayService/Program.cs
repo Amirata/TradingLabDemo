@@ -12,13 +12,13 @@ builder.Services.AddReverseProxy()
 //         options.TokenValidationParameters.ValidateAudience = false;
 //         options.TokenValidationParameters.NameClaimType = "username";
 //     });
-
+var allowedOrigins = builder.Configuration.GetSection("ClientApp").Get<string[]>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("customPolicy", b =>
     {
         b.AllowAnyHeader().AllowAnyMethod().AllowCredentials()
-            .WithOrigins(builder.Configuration["ClientApp"]!);
+            .WithOrigins(allowedOrigins!);
     });
 });
 

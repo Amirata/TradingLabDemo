@@ -11,14 +11,6 @@ using TradingJournal.Api.Consumers;
 
 namespace TradingJournal.Api;
 
-public class CorsSettings
-{
-    public string[] AllowedOrigins { get; set; } = [];
-    public string[] AllowedMethods { get; set; } = [];
-    public string[] AllowedHeaders { get; set; } = [];
-    public bool AllowCredentials { get; set; }
-}
-
 public static class DependencyInjection
 {
     public static IServiceCollection AddApiServices
@@ -110,29 +102,6 @@ public static class DependencyInjection
                 });
 
                 cfg.ConfigureEndpoints(context);
-            });
-        });
-
-        // خواندن تنظیمات CORS
-        var corsSettings = configuration.GetSection("Cors").Get<CorsSettings>();
-
-// اضافه کردن سرویس CORS
-        services.AddCors(options =>
-        {
-            options.AddPolicy("MyCorsPolicy", builder =>
-            {
-                builder.WithOrigins(corsSettings!.AllowedOrigins)
-                    .WithMethods(corsSettings.AllowedMethods)
-                    .WithHeaders(corsSettings.AllowedHeaders);
-
-                if (corsSettings.AllowCredentials)
-                {
-                    builder.AllowCredentials();
-                }
-                else
-                {
-                    builder.DisallowCredentials();
-                }
             });
         });
 

@@ -93,8 +93,8 @@ services:
       context: .
       dockerfile: client-app/Dockerfile
       args:
-        - VITE_APP_API_URL=api.tradinglabs.ir/
-        - VITE_APP_IMG_URL=api.tradinglabs.ir/TechnicImages/
+        - VITE_APP_API_URL=https://api.tradinglabs.ir/
+        - VITE_APP_IMG_URL=https://api.tradinglabs.ir/TechnicImages/
     container_name: client-svc
     restart: unless-stopped
     environment:
@@ -111,7 +111,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
-      - ClientApp=tradinglabs.ir
+      - ClientApp=["https://tradinglabs.ir", "https://www.tradinglabs.ir"]
       - VIRTUAL_HOST=api.tradinglabs.ir
       - VIRTUAL_PORT=80
     depends_on:

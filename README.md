@@ -78,16 +78,12 @@ You can run this application on an Ubuntu server by following these instructions
    sudo nano compose.yaml
    ```
     - Save changes by pressing `Ctrl + X`, then `Y`, then `Enter`.
-4. Edit the `appsettings.json` file to configure your domain:
-   ```bash
-   sudo nano src/TradingJournalService/TradingJournal.Api/appsettings.json
-   ```
-    - Save changes by pressing `Ctrl + X`, then `Y`, then `Enter`.
-5. Build the services on your server (this may take several minutes):
+
+4. Build the services on your server (this may take several minutes):
    ```bash
    docker compose build
    ```
-6. Run the services in detached mode:
+5. Run the services in detached mode:
    ```bash
    docker compose up -d
    ```
