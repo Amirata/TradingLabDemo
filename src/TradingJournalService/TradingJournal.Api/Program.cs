@@ -14,6 +14,8 @@ builder.Services.AddApplicationServices(builder.Configuration)
 
 var app = builder.Build();
 
+// فعال‌سازی CORS
+app.UseCors("MyCorsPolicy");
 
 app.UseStaticFiles();
 

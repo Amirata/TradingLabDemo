@@ -10,6 +10,15 @@ using Microsoft.IdentityModel.Tokens;
 using TradingJournal.Api.Consumers;
 
 namespace TradingJournal.Api;
+
+public class CorsSettings
+{
+    public string[] AllowedOrigins { get; set; } = [];
+    public string[] AllowedMethods { get; set; } = [];
+    public string[] AllowedHeaders { get; set; } = [];
+    public bool AllowCredentials { get; set; }
+}
+
 public static class DependencyInjection
 {
     public static IServiceCollection AddApiServices
@@ -37,15 +46,15 @@ public static class DependencyInjection
         {
             c.UseAllOfToExtendReferenceSchemas();
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API - V1", Version = "v1.0" });
-            
-            
+
+
             // using System.Reflection;
             var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
         });
 
         services.AddExceptionHandler<CustomExceptionHandler>();
-        
+
         var jwtSettings = configuration.GetSection("Jwt");
         var secretKey = jwtSettings["Key"];
         var issuer = jwtSettings["Issuer"];
@@ -78,7 +87,7 @@ public static class DependencyInjection
             .AddPolicy(nameof(Policies.AdminOrUser), policy =>
                 policy.RequireRole(nameof(Roles.Admin), nameof(Roles.User)));
 
-        
+
         services.AddMassTransit(x =>
         {
             x.AddConsumersFromNamespaceContaining<UserCreatedConsumer>();
@@ -95,16 +104,37 @@ public static class DependencyInjection
 
                 cfg.ReceiveEndpoint("journal-user-created", e =>
                 {
-                    e.UseMessageRetry(r => r.Interval(5,5));
-            
+                    e.UseMessageRetry(r => r.Interval(5, 5));
+
                     e.ConfigureConsumer<UserCreatedConsumer>(context);
                 });
 
                 cfg.ConfigureEndpoints(context);
             });
         });
-        
-        
+
+        // خواندن تنظیمات CORS
+        var corsSettings = configuration.GetSection("Cors").Get<CorsSettings>();
+
+// اضافه کردن سرویس CORS
+        services.AddCors(options =>
+        {
+            options.AddPolicy("MyCorsPolicy", builder =>
+            {
+                builder.WithOrigins(corsSettings!.AllowedOrigins)
+                    .WithMethods(corsSettings.AllowedMethods)
+                    .WithHeaders(corsSettings.AllowedHeaders);
+
+                if (corsSettings.AllowCredentials)
+                {
+                    builder.AllowCredentials();
+                }
+                else
+                {
+                    builder.DisallowCredentials();
+                }
+            });
+        });
 
         return services;
     }
