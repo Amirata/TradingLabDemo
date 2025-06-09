@@ -13,7 +13,7 @@ builder.Services.AddReverseProxy()
 //         options.TokenValidationParameters.NameClaimType = "username";
 //     });
 var clientApp = builder.Configuration["ClientApp"];
-Console.WriteLine(clientApp); // بررسی کنید که چه مقداری چاپ می‌شود
+//Console.WriteLine(clientApp);
 var allowedOrigins = System.Text.Json.JsonSerializer.Deserialize<string[]>(clientApp!);
 builder.Services.AddCors(options =>
 {

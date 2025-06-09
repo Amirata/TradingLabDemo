@@ -78,8 +78,7 @@ public static class DependencyInjection
             .AddPolicy(nameof(Policies.AdminOnly), policy => policy.RequireRole(nameof(Roles.Admin)))
             .AddPolicy(nameof(Policies.AdminOrUser), policy =>
                 policy.RequireRole(nameof(Roles.Admin), nameof(Roles.User)));
-
-
+        
         services.AddMassTransit(x =>
         {
             x.AddConsumersFromNamespaceContaining<UserCreatedConsumer>();

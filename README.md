@@ -132,4 +132,4 @@ You can run this application on an Ubuntu server by following these instructions
    ```
 
 ## TradingLab Is Ready
-1. You should now be able to access the application at `https://yourdomain.com`.
+1. You should now be able to access the application at `https://yourdomain.com`. 
